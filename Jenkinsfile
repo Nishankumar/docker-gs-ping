@@ -30,9 +30,10 @@ pipeline {
                 script{
                     sh '''
                     echo 'Push to Repo'
-                    docker.withRegistry( 'https://registry.hub.docker.com', 'docker-cred' ) {
-                      def customImage = docker.build("nishankumar1999/goapp:${BUILD_NUMBER}")
-                      customImage.push()
+                    def dockerImage = docker.image("nishankumar1999/goapp:${BUILD_NUMBER}")
+                    docker.withRegistry('https://registry.hub.docker.com', "docker-cred") {
+                    dockerImage.push()
+                    }
                     '''
                 }
             }
