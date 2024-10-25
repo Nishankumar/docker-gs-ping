@@ -10,7 +10,7 @@ pipeline {
         
         stage('Checkout'){
            steps {                
-                url: 'https://github.com/iam-veeramalla/cicd-end-to-end',
+                url: 'https://github.com/Nishankumar/docker-gs-ping.git',
                 branch: 'main'
            }
         }
@@ -20,7 +20,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    docker build -t abhishekf5/cicd-e2e:${BUILD_NUMBER} .
+                    docker build -t nishankumar1999/goapp:${BUILD_NUMBER} .
                     '''
                 }
             }
@@ -31,17 +31,10 @@ pipeline {
                 script{
                     sh '''
                     echo 'Push to Repo'
-                    docker push abhishekf5/cicd-e2e:${BUILD_NUMBER}
+                    docker push nishankumar1999/goapp:${BUILD_NUMBER}
                     '''
                 }
             }
-        }            
-        
-        stage('Update K8S manifest & push to Repo'){
-            steps {
-                script{                    
-                }
-            }
-        }
+        }                    
     }
 }
