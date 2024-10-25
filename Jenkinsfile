@@ -26,10 +26,13 @@ pipeline {
         }
 
         stage('Push the artifacts'){
+              environment {
+                DOCKER_IMAGE = "nishankumar1999/goapp:${BUILD_NUMBER}"
+              }
            steps{
                 script{
                     echo 'Push to Repo'
-                    def dockerImage = docker.image("nishankumar1999/goapp:${BUILD_NUMBER}")
+                    def dockerImage = docker.image("${DOCKER_IMAGE}")
                     docker.withRegistry('https://registry.hub.docker.com', "docker-cred") {
                     dockerImage.push()
                     }
