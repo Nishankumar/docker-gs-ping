@@ -10,8 +10,7 @@ pipeline {
         
         stage('Checkout'){
            steps {                
-                url: 'https://github.com/Nishankumar/docker-gs-ping.git',
-                branch: 'main'
+               git url: 'https://github.com/Nishankumar/docker-gs-ping.git', branch: 'main'
            }
         }
 
